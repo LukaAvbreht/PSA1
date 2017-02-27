@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
-from .otherFunctions import list_primernih_otrok,all_valid_cycles,directet_tree
+from .otherFunctions import all_valid_cycles,directet_tree
 sys.setrecursionlimit(100000)
 
 __author__ = "LukaAvbreht"
@@ -37,15 +37,15 @@ def maxCycleTreeIndependentSet(T, w):
         else:
             res = 0
             nivo = int(nivo)
-            vozlisca_grafa = tuple()
             for j,i in enumerate(cikel):
                 if i == '1':
                     res+= w[j][nivo]
-                    vozlisca_grafa += ((j, nivo),)
-            memovred[nivo,cikel] = (res, vozlisca_grafa)
-            return res, vozlisca_grafa
+            memovred[nivo,cikel] = (res) #, cikel)
+            return res  #, cikel
 
     vsi_mozni_cikli = all_valid_cycles(k)
+
+    graf = [None] * n
 
     memo = dict()
 
@@ -60,21 +60,24 @@ def maxCycleTreeIndependentSet(T, w):
 
         # Computation of largest subgroup
         res = 0
-        nodes = list()
 
         for patern in vsi_mozni_cikli[cycle]:
-            weight, index = vrednost_cikla_na_nivoju(ind_voz, patern)
-            index = list(index)
+            weight = vrednost_cikla_na_nivoju(ind_voz, patern)
             for voz in T[ind_voz]:
-                tr_weight, tr_index = recursive_max_subgroup(voz, patern)
+                tr_weight = recursive_max_subgroup(voz, patern)
                 weight += tr_weight
-                index += list(tr_index)
             if weight > res:
                 res = weight
-                nodes = index
-        memo[(ind_voz, cycle)] = (res, frozenset(nodes))
-        return res, frozenset(nodes)
+                graf[ind_voz] = patern
+        memo[(ind_voz, cycle)] = (res)
+        return res
+
+
     cycle = '0'*k
     res = recursive_max_subgroup(0, cycle)
-    graf = list(res[1])
-    return res[0], graf
+    resg = list()
+    for i,j in enumerate(graf):
+        for m,k in enumerate(j):
+            if k == "1":
+                resg.append((i,m))
+    return res, resg
