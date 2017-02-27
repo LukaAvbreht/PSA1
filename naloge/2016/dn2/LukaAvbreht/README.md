@@ -78,7 +78,7 @@ ter to na vsakem nivoju v najslabsem primeru naredimo v za vsako mozno binarno z
 Skupna casovna zahtevnost:
 
 ``` 
-O(T^4k * k * m^2 )
+O((k*m + 1 + T*n)*T^k)
 ```
 
 ## Prostorska zahtevnost
