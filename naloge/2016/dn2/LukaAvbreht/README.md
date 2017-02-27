@@ -83,14 +83,14 @@ O((k*m + 1 + T*n)*T^k)
 
 ## Prostorska zahtevnost
 
-Slovar memorizacije tez: `O(m*T^k)`
+Slovar memorizacije tež: `O(m*T^k)`
 V najslabsem primeru bomo na vsakem nivoju izracunali tezo za vsako razlicno zaporedje
 
 Slovar memorizacije rezultatov poddreves: `O(T^k*n)`
 Za vsako zaporedje namrec lahko shranimo rezultat za vsako povezavo, ki jo imamo.
 
 Slovar ki ga uporabimo za maximiziranje v rekurziji: `O(T^2k)`
-Za vsako mozno binarno zaporedje imamao namrec slovar, ki ima za vrednosti vse mozne sinove.
+Za vsako mozno binarno zaporedje imamao namrec kluc, ki ima za vrednosti vse mozne sinove.
 
 Skupna prostorska zahtevnost je torej: 
 ```
